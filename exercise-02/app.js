@@ -26,17 +26,16 @@ handleClickBuy = () => {
   // console.log(this.state.availableProducts)
 
   render() {
-    const sC = this.state.shoppingCart
-    const aP = this.state.availableProducts
+    const {shoppingCart, availableProducts,  } = this.state
     const style = this.state.shoppingCart===0 ? {opacity: 0.3} : {};
 
     return (
       <>
-        <button disabled={sC ? false : true} onClick={this.handleRemoveFromC}>-</button>
-        <span style={style} > {sC} </span>
-        <button disabled={sC === aP ? true : false}onClick={this.handleAddToC}>+</button>
-        {sC>0 && <button onClick={this.handleClickBuy}>Kup</button>}
-        <div>{aP}</div>      </>
+        <button disabled={shoppingCart ? false : true} onClick={this.handleRemoveFromC}>-</button>
+        <span style={style} > {shoppingCart} </span>
+        <button disabled={shoppingCart === availableProducts ? true : false}onClick={this.handleAddToC}>+</button>
+        {shoppingCart>0 && <button onClick={this.handleClickBuy}>Kup</button>}
+        <div>{availableProducts}</div>      </>
     )
   }
 }
