@@ -23,8 +23,6 @@ handleClickBuy = () => {
     shoppingCart: 0,
   })}
   
-  // console.log(this.state.availableProducts)
-
   render() {
     const {shoppingCart, availableProducts,  } = this.state
     const style = this.state.shoppingCart===0 ? {opacity: 0.3} : {};
@@ -35,7 +33,8 @@ handleClickBuy = () => {
         <span style={style} > {shoppingCart} </span>
         <button disabled={shoppingCart === availableProducts ? true : false}onClick={this.handleAddToC}>+</button>
         {shoppingCart>0 && <button onClick={this.handleClickBuy}>Kup</button>}
-        <div>{availableProducts}</div>      </>
+        <div>{availableProducts}</div>      
+      </>
     )
   }
 }
