@@ -5,21 +5,21 @@ const data = {
       id: 1,
       age: 19,
       name: 'Michał',
-      nationality:'Uganda',
+      // nationality:'Uganda',
       sex: 'male'
     },
     {
       id: 2,
       age: 29,
       name: 'Ania',
-      nationality:'Cameroon',
+      // nationality:'Cameroon',
       sex: 'female'
     },
     {
       id: 3,
       age: 39,
       name: 'Roksi',
-      nationality:'RPA',
+      // nationality:'RPA',
       sex: 'female'
     }
   ]
@@ -36,12 +36,39 @@ const Item = ({user}) => (
 
 class ListItems extends React.Component {
 
+  state = {
+    select: 'all',
+  }
+  handleUsersFilter(option)  {
+    this.setState({
+      select: option
+    })
+  }
+
+  userList = () => {
+    let people = this.props.data.users;
+    switch(this.state.select) {
+      case 'all':
+      return people.map(user=><Item user={user} key={user.id}/>);
+      case 'female':
+      people = people.filter(user=>user.sex === 'female');
+      return people.map(user=><Item user={user} key={user.id}/>)
+      case 'male':
+      people = people.filter(user=>user.sex === 'male');
+      return people.map(user=><Item user={user} key={user.id}/>)
+      default: 
+      return 'brak danych'
+    }
+
+  }
   render() {
-    let pF = this.props.data.users;
-    pF = pF.filter((user)=> user.sex === 'female')
+
     return (
       <div>
-        {pF.map((dupa) => <Item key={dupa.id} user={dupa}/>)}
+          <button onClick={this.handleUsersFilter.bind(this, 'all')}>All genders</button>
+          <button onClick={this.handleUsersFilter.bind(this, 'male')}>Male</button>
+          <button onClick={this.handleUsersFilter.bind(this, 'female')}>Female</button>
+          {this.userList()}
       </div>
     )
   }
